@@ -1,0 +1,23 @@
+<md-list-item [ngClass]="{'highlight': hero.highlight}">
+        <img *ngIf="hero.default" class="cp" md-list-avatar
+            src="assets/images/heroes/{{hero.id}}-thumbnail.jpg">
+        <img *ngIf="!hero.default" md-list-avatar src="assets/images/heroes/default.png">
+        <div md-line [ngClass]="hero.likes>='2500'?'cp':''" [routerLink]="hero.likes>='2500'?['/heroes', hero.id]:''">
+            <h3 md-line> {{hero.name}} </h3>
+            <p md-line>
+                <span>{{hero.alterEgo}}</span>
+            </p>
+        </div>
+    <div class="hero-actions">
+        {{hero.likes}}
+        <md-icon mdTooltip="{{(canVote ? 'canVote' : 'cannotVote') | translate}}"
+                 [mdTooltipPosition]="'above'"
+                 class="like-icon" (click)="likeHero(hero)">
+            favorite
+        </md-icon>
+        <md-icon class="remove-icon" *ngIf="!hero.default"
+                 (click)="removeHero(hero);">
+            delete
+        </md-icon>
+    </div>
+</md-list-item>
